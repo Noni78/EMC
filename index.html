@@ -397,8 +397,8 @@
 
     <nav id="nav">
         <ul>
-            <li><a onclick="showSection('france'); return false;" class="active-france" id="nav-france">En France</a></li>
-            <li><a onclick="showSection('gymnase'); return false;" id="nav-gymnase">Au Gymnase</a></li>
+            <li><a onclick="showSection('france'); window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="active-france" id="nav-france">En France</a></li>
+            <li><a onclick="showSection('gymnase'); window.scrollTo({top: 0, behavior: 'smooth'}); return false;" id="nav-gymnase">Au Gymnase</a></li>
         </ul>
     </nav>
 
@@ -528,3 +528,4 @@
 </body>
 
 </html>
+
