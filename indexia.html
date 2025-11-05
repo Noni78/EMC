@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraternité et Solidarité - Cohésion Sociale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overscroll-behavior: none;
+        }
+
+        html {
+            overscroll-behavior: none;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #c41e3a 0%, #0055a4 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: none;
+        }
+
+        nav.visible {
+            display: block;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+
+        nav li {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        nav a {
+            display: block;
+            padding: 1.5rem 2rem;
+            text-decoration: none;
+            color: #333;
+            text-align: center;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: 3px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        nav a.active-france {
+            border-color: #c41e3a;
+            color: white;
+            background: linear-gradient(135deg, #c41e3a 0%, #e63946 100%);
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+        }
+
+        nav a.active-gymnase {
+            border-color: #0055a4;
+            color: white;
+            background: linear-gradient(135deg, #0055a4 0%, #1976d2 100%);
+            box-shadow: 0 4px 12px rgba(0, 85, 164, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 70vh;
+            display: none;
+        }
+
+        section.visible {
+            display: block;
+        }
+
+        /* Section France */
+        #france {
+            background: linear-gradient(to bottom, #fff 0%, #ffe6ea 100%);
+        }
+
+        #france h2 {
+            color: #c41e3a;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #c41e3a;
+            padding-left: 1rem;
+        }
+
+        #france h3 {
+            color: #d32f2f;
+            font-size: 1.6rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Section Gymnase */
+        #gymnase {
+            background: linear-gradient(to bottom, #fff 0%, #e3f2fd 100%);
+        }
+
+        #gymnase h2 {
+            color: #0055a4;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #0055a4;
+            padding-left: 1rem;
+        }
+
+        #gymnase h3 {
+            color: #1976d2;
+            font-size: 1.6rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Cards */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: #bdbdbd;
+        }
+
+        .card-france {
+            border-top: 3px solid #c41e3a;
+        }
+
+        .card-gymnase {
+            border-top: 3px solid #0055a4;
+        }
+
+        .card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-france h4 {
+            color: #c41e3a;
+        }
+
+        .card-gymnase h4 {
+            color: #0055a4;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Content placeholder */
+        .content-text {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            margin: 2rem 0;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            display: none;
+        }
+
+        footer.visible {
+            display: block;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* Page d'accueil */
+        #accueil {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            padding: 3rem 2rem;
+            background: #f8f9fa;
+            position: relative;
+        }
+
+        #accueil::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(196, 30, 58, 0.05) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(0, 85, 164, 0.05) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(196, 30, 58, 0.05) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(0, 85, 164, 0.05) 75%);
+            background-size: 60px 60px;
+            background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        #accueil.hidden {
+            display: none;
+        }
+
+        .accueil-content {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .accueil-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #c41e3a 0%, #0055a4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .accueil-content p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: #555;
+        }
+
+        .accueil-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .accueil-btn {
+            padding: 2rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 250px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .accueil-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .accueil-btn-france {
+            background: linear-gradient(135deg, #c41e3a 0%, #e63946 100%);
+        }
+
+        .accueil-btn-france:hover {
+            background: linear-gradient(135deg, #e63946 0%, #ff5a67 100%);
+        }
+
+        .accueil-btn-gymnase {
+            background: linear-gradient(135deg, #0055a4 0%, #1976d2 100%);
+        }
+
+        .accueil-btn-gymnase:hover {
+            background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav li {
+                border-bottom: 1px solid #eee;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            .accueil-content h2 {
+                font-size: 2rem;
+            }
+
+            .accueil-content p {
+                font-size: 1.1rem;
+            }
+
+            .accueil-buttons {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 1rem;
+            }
+
+            .accueil-btn {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fraternité et Solidarité</h1>
+        <p>Sources de cohésion sociale en France et au Gymnase Jean Sturm</p>
+    </header>
+
+    <!-- Page d'accueil -->
+    <section id="accueil">
+        <div class="accueil-content">
+            <h2>Bienvenue</h2>
+            <p>Comment la fraternité et la solidarité créent de la cohésion sociale</p>
+            <div class="accueil-buttons">
+                <div class="accueil-btn accueil-btn-france" onclick="startExploration('france')">
+                    En France
+                </div>
+                <div class="accueil-btn accueil-btn-gymnase" onclick="startExploration('gymnase')">
+                    Au Gymnase
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <nav id="nav">
+        <ul>
+            <li><a onclick="showSection('france'); window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="active-france" id="nav-france">En France</a></li>
+            <li><a onclick="showSection('gymnase'); window.scrollTo({top: 0, behavior: 'smooth'}); return false;" id="nav-gymnase">Au Gymnase</a></li>
+        </ul>
+    </nav>
+
+    <section id="france">
+        <h2>Fraternité et Solidarité en France</h2>
+        
+        <div class="content-text">
+            <p>La <strong>fraternité</strong>, troisième pilier de la devise républicaine, est au cœur du pacte social français. Elle encourage la solidarité entre citoyens, le respect mutuel et crée du lien social. La <strong>solidarité</strong> est l'expression concrète de la fraternité : elle se traduit par des actions d'entraide et de soutien mutuel qui renforcent la cohésion nationale.</p>
+        </div>
+
+        <h3>La Fraternité en France</h3>
+        
+        <div class="card-container">
+            <div class="card card-france">
+                <h4>Valeur Républicaine</h4>
+                <p>La fraternité est inscrite dans la devise nationale et la Constitution. Elle représente le lien qui unit tous les citoyens français au-delà de leurs différences, créant un sentiment d'appartenance commune.</p>
+                <p><em>Exemple : Devise "Liberté, Égalité, Fraternité", principe constitutionnel.</em></p>
+            </div>
+
+            <div class="card card-france">
+                <h4>Vivre Ensemble</h4>
+                <p>La fraternité encourage le respect mutuel, le dialogue et la compréhension entre citoyens. Elle favorise l'acceptation des différences et la construction d'une société inclusive.</p>
+                <p><em>Exemple : Laïcité respectueuse, dialogue interculturel, tolérance.</em></p>
+            </div>
+
+            <div class="card card-france">
+                <h4>Lien Social</h4>
+                <p>La fraternité crée du lien entre les générations, les territoires et les groupes sociaux. Elle lutte contre l'isolement et renforce le tissu social de la nation.</p>
+                <p><em>Exemple : Fête des voisins, solidarité intergénérationnelle, entraide de proximité.</em></p>
+            </div>
+        </div>
+
+        <h3>La Solidarité en France</h3>
+        
+        <div class="card-container">
+            <div class="card card-france">
+                <h4>Protection Sociale</h4>
+                <p>L'État français garantit un système de solidarité nationale à travers la Sécurité sociale, les allocations et les aides sociales. Chacun contribue selon ses moyens pour protéger tous les citoyens.</p>
+                <p><em>Exemple : Sécurité sociale, allocations familiales, RSA, aide aux chômeurs.</em></p>
+            </div>
+
+            <div class="card card-france">
+                <h4>Engagement Associatif</h4>
+                <p>Des millions de Français s'engagent bénévolement dans des associations caritatives et humanitaires. Cet engagement solidaire concrétise les valeurs de fraternité.</p>
+                <p><em>Exemple : Restos du Cœur, Croix-Rouge, Secours Populaire, bénévolat.</em></p>
+            </div>
+
+            <div class="card card-france">
+                <h4>Solidarité en Action</h4>
+                <p>Face aux crises et aux difficultés, la solidarité nationale se manifeste par des élans collectifs d'entraide et de soutien aux plus vulnérables.</p>
+                <p><em>Exemple : Aide lors de catastrophes naturelles, accueil de réfugiés, mobilisation citoyenne.</em></p>
+            </div>
+        </div>
+
+        <h3>Impact sur la Cohésion Sociale</h3>
+        
+        <div class="content-text">
+            <p><strong>Ajouter ici:</strong></p>
+            <p>• Comment la fraternité crée un sentiment d'appartenance nationale<br>
+            • Le rôle de la solidarité dans la réduction des inégalités<br>
+            • Des exemples de mobilisations solidaires (crises, mouvements sociaux)<br>
+            • Les institutions qui incarnent ces valeurs (École, services publics)<br>
+            • Les défis actuels : individualisme, fractures sociales<br>
+            • L'importance de ces valeurs pour l'avenir de la République</p>
+        </div>
+    </section>
+
+    <section id="gymnase">
+        <h2>Fraternité et Solidarité au Gymnase Jean Sturm</h2>
+        
+        <div class="content-text">
+            <p>Le Gymnase Jean Sturm, établissement historique de Strasbourg, incarne au quotidien les valeurs de fraternité et de solidarité. Ces valeurs se vivent concrètement dans notre lycée à travers le respect mutuel et les actions d'entraide qui permettent à chacun de s'épanouir et de réussir ensemble.</p>
+        </div>
+
+        <h3>La Fraternité au Gymnase</h3>
+        
+        <div class="card-container">
+            <div class="card card-gymnase">
+                <h4>Respect et Vivre Ensemble</h4>
+                <p>La fraternité se manifeste par le respect des différences, l'acceptation de la diversité culturelle et sociale, et la création d'un climat scolaire bienveillant pour tous.</p>
+                <p><em>Exemple : Respect mutuel, dialogue, lutte contre les discriminations, inclusion.</em></p>
+            </div>
+
+            <div class="card card-gymnase">
+                <h4>Esprit Communautaire</h4>
+                <p>Le Gymnase cultive un fort sentiment d'appartenance à travers les événements collectifs, les traditions et l'accueil chaleureux des nouveaux élèves qui intègrent la communauté.</p>
+                <p><em>Exemple : Accueil des nouveaux, événements du lycée, esprit de classe, traditions.</em></p>
+            </div>
+
+            <div class="card card-gymnase">
+                <h4>Engagement Citoyen</h4>
+                <p>Les élèves apprennent la fraternité en participant à la vie démocratique du lycée via le CVL, les délégués, et en s'impliquant dans des projets collectifs.</p>
+                <p><em>Exemple : CVL, délégués de classe, débats, projets participatifs.</em></p>
+            </div>
+        </div>
+
+        <h3>La Solidarité au Gymnase</h3>
+        
+        <div class="card-container">
+            <div class="card card-gymnase">
+                <h4>Entraide Scolaire</h4>
+                <p>Le Gymnase organise l'entraide entre élèves à travers le tutorat, SOS Maths, et l'accompagnement personnalisé. Les élèves s'entraident pour progresser ensemble et personne n'est laissé de côté.</p>
+                <p><em>Exemple : SOS Maths, tutorat entre élèves, groupes de travail, soutien scolaire.</em></p>
+            </div>
+
+            <div class="card card-gymnase">
+                <h4>Actions Solidaires</h4>
+                <p>Notre établissement organise régulièrement des actions caritatives et humanitaires qui développent l'esprit de solidarité et l'engagement concret des élèves envers ceux qui en ont besoin.</p>
+                <p><em>Exemple : Collectes alimentaires, actions pour des associations, projets humanitaires.</em></p>
+            </div>
+
+            <div class="card card-gymnase">
+                <h4>Soutien Mutuel</h4>
+                <p>Au quotidien, la solidarité se vit dans l'attention portée aux élèves en difficulté, le soutien entre camarades et l'aide apportée par les professeurs et l'équipe éducative.</p>
+                <p><em>Exemple : Accompagnement des élèves fragiles, écoute, conseil, présence.</em></p>
+            </div>
+        </div>
+
+        <h3>Impact sur la Cohésion au Lycée</h3>
+        
+        <div class="content-text">
+            <p><strong>Ajouter ici:</strong></p>
+            <p>• Comment la fraternité crée un climat scolaire positif<br>
+            • Le rôle de la solidarité dans la réussite de tous les élèves<br>
+            • Des témoignages concrets d'élèves sur l'entraide (SOS Maths, tutorat)<br>
+            • Les projets solidaires marquants organisés par le Gymnase<br>
+            • Comment ces valeurs préparent à la citoyenneté<br>
+            • L'héritage humaniste du Gymnase (fondé en 1538)<br>
+            • La diversité du lycée comme richesse</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Projet EMC - Gymnase Jean Sturm, Strasbourg</p>
+        <p>Fraternité et Solidarité : fondements de notre cohésion sociale</p>
+    </footer>
+
+    <script>
+        function startExploration(sectionId) {
+            // Masquer la page d'accueil
+            document.getElementById('accueil').classList.add('hidden');
+            
+            // Afficher la navigation et le footer
+            document.getElementById('nav').classList.add('visible');
+            document.querySelector('footer').classList.add('visible');
+            
+            // Afficher la section choisie
+            showSection(sectionId);
+        }
+
+        function showSection(sectionId) {
+            // Masquer toutes les sections de contenu
+            document.querySelectorAll('section:not(#accueil)').forEach(section => {
+                section.classList.remove('visible');
+            });
+            
+            // Afficher la section sélectionnée
+            document.getElementById(sectionId).classList.add('visible');
+            
+            // Mettre à jour la navigation
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active-france', 'active-gymnase');
+            });
+            
+            if (sectionId === 'france') {
+                document.getElementById('nav-france').classList.add('active-france');
+            } else {
+                document.getElementById('nav-gymnase').classList.add('active-gymnase');
+            }
+        }
+
+        // Afficher la page d'accueil par défaut (rien d'autre n'est visible)
+    </script>
+</body>
+</html>
