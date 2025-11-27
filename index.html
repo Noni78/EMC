@@ -43,6 +43,25 @@
             opacity: 0.95;
         }
 
+        /* Logo dans le header */
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo img {
+            width: 140px;
+            height: auto;
+            max-height: 80px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            background: white;
+            padding: 4px;
+        }
+
         /* Navigation */
         nav {
             background: white;
@@ -426,7 +445,10 @@
 
             <div class="card card-france">
                 <h4>Un exemple d'association : Emmaus</h4>
-                 <p>La fraternité en action, récemment chez nous en Alsace ! </p>
+                 <p>La fraternité en action, récemment chez nous en Alsace ! </p> 
+                 <div class="logo">
+            <img src="images/emmaus.jpg" alt="Logo Emmaüs (placeholder)" id="emmaus-logo">
+        </div>
                 <p><iframe 
                     src="https://embed.radiofrance.fr/francebleu/diffusion/12819818-2aa5-4818-aa9c-8f1d5d6cf377" 
                     frameborder="0" width="100%" height="auto"></iframe></p>
@@ -448,7 +470,7 @@
                 <h4>Protection Sociale</h4>
                 <p>L'État français garantit un système de solidarité nationale à travers la Sécurité sociale,
                      les allocations et les aides sociales. Chacun contribue selon ses moyens pour protéger tous les citoyens.</p>
-                <p><em>Exemple : Sécurité sociale, allocations familiales, RSA, aide aux chômeurs,<strong>trouver encore autre exemple</strong></em></p>
+                <p><em>Exemple : Sécurité sociale, allocations familiales, RSA, aide aux chômeurs, bourse scolaire etc...</em></p>
             </div>
 
             <div class="card card-france">
